@@ -6,6 +6,7 @@ from entities.player import Player
 import logging
 from systems.debug import DebugSystem as DS
 
+
 def setup_logging():
     logging.basicConfig(
         filename='game_debug.log', 
@@ -13,9 +14,11 @@ def setup_logging():
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
+
 def handle_input(event, player, projectile_manager):
     # Remove the projectile firing code from here since it's handled in player.py
     pass
+
 
 def main():
     setup_logging()
@@ -26,6 +29,7 @@ def main():
     pygame.init()
     pygame.font.init()
 
+    # Set up display
     screen = pygame.display.set_mode((1000, 1000))
     clock = pygame.time.Clock()
 
@@ -41,6 +45,7 @@ def main():
 
     debug_system = DS()
 
+    # Main game loop
     while True:
         # Handle events
         for event in pygame.event.get():
@@ -49,7 +54,7 @@ def main():
                 pygame.quit()
                 sys.exit()
             
-            # game exits if escape is pressed
+            # Game exits if escape is pressed
             if event.type == pygame.KEYDOWN:  # Keyboard event
                 if event.key == pygame.K_ESCAPE:  # Specific key check
                     pygame.quit()
@@ -79,6 +84,7 @@ def main():
 
         # Instead of print statements, use logging
         logging.debug(f"Player position: {player.rect.center}")
+
 
 if __name__ == "__main__":
     main()
