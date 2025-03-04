@@ -13,13 +13,7 @@ def setup_logging():
         level=logging.DEBUG,
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
-
-
-def handle_input(event, player, projectile_manager):
-    # Remove the projectile firing code from here since it's handled in player.py
-    pass
-
-
+    
 def main():
     setup_logging()
     # Set up the base path relative to this file's location
@@ -46,24 +40,22 @@ def main():
     debug_system = DS()
 
     # Main game loop
-    while True:
+    running = True
+    while running:
         # Handle events
         for event in pygame.event.get():
             # Window close button clicked
             if event.type == pygame.QUIT:  # System event
-                pygame.quit()
-                sys.exit()
+                running = False
             
             # Game exits if escape is pressed
             if event.type == pygame.KEYDOWN:  # Keyboard event
                 if event.key == pygame.K_ESCAPE:  # Specific key check
-                    pygame.quit()
-                    sys.exit()
+                    running = False
                 if event.key == pygame.K_d:  # Press 'D' to toggle debug mode
                     debug_system.toggle()
                 if event.key == pygame.K_h:  # Press 'H' to show hitboxes
                     debug_system.toggle_hitboxes()
-                handle_input(event, player, projectile_manager)
 
         # Update all game objects
         all_sprites.update()
@@ -85,6 +77,9 @@ def main():
         # Instead of print statements, use logging
         logging.debug(f"Player position: {player.rect.center}")
 
+    # Clean up properly
+    pygame.quit()
+    sys.exit()
 
 if __name__ == "__main__":
     main()

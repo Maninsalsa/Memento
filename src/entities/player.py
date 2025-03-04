@@ -5,7 +5,7 @@ import math
 
 """
 Player module
-Contains image
+
 """
 
 
@@ -73,12 +73,28 @@ class Player(pygame.sprite.Sprite):
 
     def _load_idle_animations(self):
         """Load idle animation frames."""
+        # Initialize separate lists for left and right idle animations
+        self.left_idle_sprites = []
+        self.right_idle_sprites = []
+        
+        # Load left idle frames
         for frame in ['Left_idle_1.png', 'Left_idle_2.png']:
             path = os.path.join(self.base_dir, f'../assets/sprites/player/idle/{frame}')
-            print(f"Loading idle frame from: {path}")
+            print(f"Loading left idle frame from: {path}")
             original = pygame.image.load(path).convert_alpha()
             scaled = pygame.transform.scale(original, self.scaled_size)
-            self.idle_sprites.append(scaled)
+            self.left_idle_sprites.append(scaled)
+        
+        # Load right idle frames
+        for frame in ['Right_idle_1.png', 'Right_idle_2.png']:
+            path = os.path.join(self.base_dir, f'../assets/sprites/player/idle/{frame}')
+            print(f"Loading right idle frame from: {path}")
+            original = pygame.image.load(path).convert_alpha()
+            scaled = pygame.transform.scale(original, self.scaled_size)
+            self.right_idle_sprites.append(scaled)
+            
+        # Set default idle sprites to left (will be updated based on player direction)
+        self.idle_sprites = self.left_idle_sprites
 
     def _load_movement_animations(self):
         """Load movement animation frames for left and right directions."""
@@ -125,10 +141,11 @@ class Player(pygame.sprite.Sprite):
         self.animation_timer = 0
         self.animation_delay = 167
         self.last_update = pygame.time.get_ticks()
-        self.current_animation = self.idle_sprites
+        self.facing_left = True  # Track which direction the player is facing
+        self.current_animation = self.left_idle_sprites  # Start with left idle animation
         
         # Set initial image
-        self.image = self.idle_sprites[self.current_sprite]
+        self.image = self.current_animation[self.current_sprite]
         self.rect = self.image.get_rect()
         self.rect.center = (500, 500)
 
@@ -180,13 +197,16 @@ class Player(pygame.sprite.Sprite):
             # Set appropriate animation based on movement direction
             if move_x < 0:
                 self.current_animation = self.left_move_sprites
+                self.facing_left = True
             else:
                 self.current_animation = self.right_move_sprites
+                self.facing_left = False
         else:
             # Reached destination
             self.rect.center = self.target_pos
             self.target_pos = None
-            self.current_animation = self.idle_sprites
+            # Use the appropriate idle animation based on which way the player is facing
+            self.current_animation = self.left_idle_sprites if self.facing_left else self.right_idle_sprites
 
     def _handle_shooting(self):
         """Handle projectile firing logic."""
@@ -216,5 +236,5 @@ class Player(pygame.sprite.Sprite):
             self.image = self.current_animation[self.current_sprite]
 
     def set_projectile_range(self, new_range):
-        """Adjust the range of projectiles"""
+        """Adjust the range of projectiles."""
         self.projectile_range = new_range
