@@ -1,4 +1,6 @@
-pygame==2.5.2
-math
-os
-Pillow==10.1.0
+Cython==3.0.12
+numpy==2.2.4
+pillow==11.0.0
+pygame-ce==2.5.2
+setuptools==78.1.0
+wheel==0.45.1
