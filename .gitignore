@@ -1,0 +1,162 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+# *
+.cursor
+.cursor/
+
+# IDE - VSCode
+.vscode/
+.vs/
+*.code-workspace
+
+# IDE - JetBrains (PyCharm, WebStorm, CLion, etc)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.env
+.venv
+env/
+venv/
+ENV/
+.python-version
+.pytest_cache/
+.coverage
+htmlcov/
+
+# JavaScript/TypeScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn
+.pnp.*
+*.tsbuildinfo
+.next/
+.nuxt/
+.cache/
+dist/
+coverage/
+
+# C/C++
+*.o
+*.ko
+*.obj
+*.elf
+*.ilk
+*.map
+*.exp
+*.gch
+*.pch
+*.lib
+*.a
+*.la
+*.lo
+*.dll
+*.so
+*.so.*
+*.dylib
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+
+# React/Web
+.DS_Store
+build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# AWS
+.aws/
+*.pem
+
+# Secrets and env files
+.env*
+*.key
+secrets.*
+credentials.*
+
+# Debug logs
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+.coverage
+.coverage.*
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
+.lock-wscript
+.node_repl_history
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
