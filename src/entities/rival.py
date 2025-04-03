@@ -20,6 +20,10 @@ class Rival(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = position
         
+        # Create hitbox for collision detection (slightly smaller than the sprite)
+        self.hitbox = pygame.Rect(0, 0, self.scaled_size[0] * 0.8, self.scaled_size[1] * 0.8)
+        self.hitbox.center = self.rect.center
+        
         # Animation settings
         self._setup_animation()
         
@@ -145,8 +149,17 @@ class Rival(pygame.sprite.Sprite):
             # Return to idle animation based on facing direction
             self.current_animation = self.left_idle_sprites if self.facing_left else self.right_idle_sprites
         
+        # Update hitbox position to follow sprite
+        self.hitbox.center = self.rect.center
+        
         # Update animation frame
         self._update_animation()
+
+    def check_projectile_collision(self, projectile):
+        """Check if a projectile has collided with the rival's hitbox."""
+        if self.hitbox.colliderect(projectile.rect):
+            return True
+        return False
 
     def _update_animation(self):
         """Update animation frames."""
@@ -158,3 +171,7 @@ class Rival(pygame.sprite.Sprite):
             self.animation_timer = 0
             self.current_sprite = (self.current_sprite + 1) % len(self.current_animation)
             self.image = self.current_animation[self.current_sprite]
+
+    def draw_hitbox(self, screen):
+        """Draw the hitbox for debugging purposes."""
+        pygame.draw.rect(screen, (255, 0, 0), self.hitbox, 1)

@@ -6,6 +6,12 @@ class ProjectileManager:
     def __init__(self) -> None:
         """Initialize the Projectile Manager"""
         self.projectiles = []  # List to hold active projectiles
+        self.targets = []      # List to hold potential targets (like rivals)
+
+    def add_target(self, target):
+        """Add a target that projectiles can collide with."""
+        if target not in self.targets:
+            self.targets.append(target)
 
     def fire_projectile(self, name: str, damage: float, speed: float, range: float, p_source: tuple, p_target: tuple):
         """Create and fire a new projectile toward the mouse position"""
@@ -36,6 +42,19 @@ class ProjectileManager:
             
             # Reduce range - this is how range is consumed
             projectile.range -= math.sqrt(projectile.velocity.x ** 2 + projectile.velocity.y ** 2)
+            
+            # Check for collision with targets
+            collision_occurred = False
+            for target in self.targets:
+                if hasattr(target, 'check_projectile_collision'):
+                    if target.check_projectile_collision(projectile):
+                        target.take_damage(projectile.damage)  # Trigger damage animation
+                        self.projectiles.remove(projectile)
+                        collision_occurred = True
+                        break
+            
+            if collision_occurred:
+                continue
             
             # Remove projectile if it exceeds its range or goes off screen
             if (projectile.range <= 0 or  # This checks if range is depleted

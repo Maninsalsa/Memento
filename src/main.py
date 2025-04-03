@@ -36,6 +36,9 @@ def main():
     
     # Initialize the rival with the projectile manager
     rival = Rival(projectile_manager, position=(500, 200))  # Pass projectile_manager and position
+    
+    # Register rival as a target for projectiles
+    projectile_manager.add_target(rival)
 
     # Add player to the sprite group
     all_sprites = pygame.sprite.Group()
@@ -70,6 +73,10 @@ def main():
         screen.fill((0, 0, 0))  # Clear the screen with black
         all_sprites.draw(screen)  # Draw player and other sprites
         projectile_manager.draw_projectiles(screen)  # Draw projectiles
+        
+        # Draw hitboxes when debug mode is enabled
+        if debug_system.show_hitboxes:
+            rival.draw_hitbox(screen)
         
         # Render debug info at the end
         debug_system.render_debug_info(screen, player, clock)
