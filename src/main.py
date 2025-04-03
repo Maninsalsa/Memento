@@ -3,6 +3,7 @@ import sys
 import os
 from systems.projectile_manager import ProjectileManager
 from entities.player import Player
+from entities.rival import Rival  # Add import for Rival
 import logging
 from systems.debug import DebugSystem as DS
 
@@ -32,10 +33,14 @@ def main():
     
     # Initialize the player with the projectile manager
     player = Player(projectile_manager)  # Pass the manager to player
+    
+    # Initialize the rival with the projectile manager
+    rival = Rival(projectile_manager, position=(500, 200))  # Pass projectile_manager and position
 
     # Add player to the sprite group
     all_sprites = pygame.sprite.Group()
     all_sprites.add(player)
+    all_sprites.add(rival)  # Add rival to sprite group
 
     debug_system = DS()
 
@@ -76,6 +81,7 @@ def main():
 
         # Instead of print statements, use logging
         logging.debug(f"Player position: {player.rect.center}")
+        logging.debug(f"Rival position: {rival.rect.center}")  # Log rival position
 
     # Clean up properly
     pygame.quit()

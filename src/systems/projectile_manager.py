@@ -3,11 +3,11 @@ import math
 from entities.projectiles import Projectile
 
 class ProjectileManager:
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the Projectile Manager"""
         self.projectiles = []  # List to hold active projectiles
 
-    def fire_projectile(self, name, damage, speed, range, p_source, p_target):
+    def fire_projectile(self, name: str, damage: float, speed: float, range: float, p_source: tuple, p_target: tuple):
         """Create and fire a new projectile toward the mouse position"""
         print(f"Firing projectile: {name} at target: {p_target}")  # Debug print
         
