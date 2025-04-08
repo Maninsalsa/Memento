@@ -1,0 +1,54 @@
+
+Current Architecture
+
+src/                              scripts/ (pygpen reference)
+├── entities/                     ├── pygpen/
+│   ├── player.py                ├── state.py
+│   ├── blue.py                  ├── physics_entity.py
+│   └── projectiles.py           ├── tilemap.py
+├── systems/                      ├── effects.py
+│   ├── debug.py                 └── ... (many specialized modules)
+│   └── projectile_manager.py
+└── main.py
+
+Future Architecture
+
+memento/
+├── engine/                    # Core engine functionality
+│   ├── window.py             # Display management
+│   ├── renderer.py           # Drawing system
+│   ├── asset_manager.py      # Resource loading/caching
+│   └── input_handler.py      # Input management
+│
+├── world/                    # World management
+│   ├── chunk_manager.py      # Chunk-based loading
+│   ├── quadtree.py          # Spatial partitioning
+│   └── camera.py            # View culling/rendering
+│
+├── entities/                 # Game objects
+│   ├── base/
+│   │   ├── entity.py        # Base entity class
+│   │   └── physics_entity.py # Physics-enabled base
+│   ├── player/
+│   │   ├── player.py        # Player logic
+│   │   └── states.py        # Player states
+│   └── enemies/
+│       └── blue.py          # Blue enemy
+│
+├── systems/                  # Game systems
+│   ├── physics/
+│   │   ├── collision.py     # Collision detection
+│   │   └── movement.py      # Movement handling
+│   ├── combat/
+│   │   ├── projectile.py    # Projectile management
+│   │   └── damage.py        # Damage handling
+│   └── debug/
+│       ├── logger.py        # Logging system
+│       └── visualizer.py    # Debug visualization
+│
+├── ui/                      # User interface
+│   ├── hud.py              # Heads-up display
+│   ├── menus.py            # Menu system
+│   └── debug_overlay.py    # Debug information
+│
+└── game.py                 # Main entry point
