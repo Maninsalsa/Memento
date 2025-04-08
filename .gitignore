@@ -40,14 +40,17 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Virtual Environment
 .env
 .venv
 env/
 venv/
 ENV/
-# Add any custom virtual environment names here
 *env/
 .python-version
+
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
@@ -169,7 +172,7 @@ coverage.xml
 .env.test.local
 .env.production.local
 
-# Game development
+# Game specific
 *.sav
 *.save
 save_data/
@@ -177,10 +180,17 @@ highscores.dat
 profiling/
 *.profile
 *.trace
+
 # Compiled game assets
 *.compiled
 *.processed
+
 # User settings
 user_settings.json
 settings.cfg
 config.ini
+
+# Cython/C++ generated files
+*.c
+*.cpp
+*.html
