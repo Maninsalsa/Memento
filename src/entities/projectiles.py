@@ -13,18 +13,18 @@ class Projectile:
 
         try:
             # Load projectile image
-            image_path = os.path.join(os.path.dirname(__file__), '../assets/sprites/player/projectiles/base.png')
-            if not os.path.exists(image_path):
-                print(f"Warning: Projectile image not found at {image_path}")
+            projectile_img_path = os.path.join(os.path.dirname(__file__), '../assets/sprites/player/projectile_sub.png')
+            if not os.path.exists(projectile_img_path):
+                print(f"Warning: Projectile image not found at {projectile_img_path}")
                 raise FileNotFoundError
                 
-            self.image = pygame.image.load(image_path).convert_alpha()
+            self.image = pygame.image.load(projectile_img_path).convert_alpha()
             # Scale the image to a smaller size
             self.image = pygame.transform.scale(self.image, (16, 16))  # Adjust size as needed
             
         except (pygame.error, FileNotFoundError) as e:
             print(f"Error loading projectile image: {e}")
-            print(f"Attempted to load from: {image_path}")
+            print(f"Attempted to load from: {projectile_img_path}")
             # Create a default surface if image fails to load
             self.image = pygame.Surface((16, 16))
             self.image.fill((255, 0, 0))  # Red rectangle as fallback

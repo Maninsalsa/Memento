@@ -3,11 +3,7 @@ import os
 from systems.projectile_manager import ProjectileManager
 import math
 
-"""
-Player module
-
-"""
-
+# Player Module
 
 class Player(pygame.sprite.Sprite):
     """Player class representing the main character controlled by the user."""
@@ -66,7 +62,7 @@ class Player(pygame.sprite.Sprite):
 
     def _load_base_image(self):
         """Load and scale the base player image."""
-        idle_path = os.path.join(self.base_dir, '../assets/sprites/player/idle/Left_idle_1.png')
+        idle_path = os.path.join(self.base_dir, '../assets/sprites/player/left_idle_1.png')
         print(f"Loading idle sprite from: {idle_path}")
         original_image = pygame.image.load(idle_path).convert_alpha()
         self.image = pygame.transform.scale(original_image, self.scaled_size)
@@ -78,16 +74,16 @@ class Player(pygame.sprite.Sprite):
         self.right_idle_sprites = []
         
         # Load left idle frames
-        for frame in ['Left_idle_1.png', 'Left_idle_2.png']:
-            path = os.path.join(self.base_dir, f'../assets/sprites/player/idle/{frame}')
+        for frame in ['left_idle_1.png', 'left_idle_2.png']:
+            path = os.path.join(self.base_dir, f'../assets/sprites/player/{frame}')
             print(f"Loading left idle frame from: {path}")
             original = pygame.image.load(path).convert_alpha()
             scaled = pygame.transform.scale(original, self.scaled_size)
             self.left_idle_sprites.append(scaled)
         
         # Load right idle frames
-        for frame in ['Right_idle_1.png', 'Right_idle_2.png']:
-            path = os.path.join(self.base_dir, f'../assets/sprites/player/idle/{frame}')
+        for frame in ['right_idle_1.png', 'right_idle_2.png']:
+            path = os.path.join(self.base_dir, f'../assets/sprites/player/{frame}')
             print(f"Loading right idle frame from: {path}")
             original = pygame.image.load(path).convert_alpha()
             scaled = pygame.transform.scale(original, self.scaled_size)
@@ -100,8 +96,8 @@ class Player(pygame.sprite.Sprite):
         """Load movement animation frames for left and right directions."""
         for i in range(1, 4):
             # Define paths
-            left_path = os.path.join(self.base_dir, f'../assets/sprites/player/moving/move_left/left_move_{i}.png')
-            right_path = os.path.join(self.base_dir, f'../assets/sprites/player/moving/move_right/move_right_{i}.png')
+            left_path = os.path.join(self.base_dir, f'../assets/sprites/player/left_move_{i}.png')
+            right_path = os.path.join(self.base_dir, f'../assets/sprites/player/move_right_{i}.png')
             
             # Check if files exist
             if not os.path.exists(left_path):

@@ -3,7 +3,7 @@ import sys
 import os
 from systems.projectile_manager import ProjectileManager
 from entities.player import Player
-from entities.rival import Rival  # Add import for Rival
+from entities.blue import Blue  # Add import for Blue
 import logging
 from systems.debug import DebugSystem as DS
 
@@ -34,16 +34,16 @@ def main():
     # Initialize the player with the projectile manager
     player = Player(projectile_manager)  # Pass the manager to player
     
-    # Initialize the rival with the projectile manager
-    rival = Rival(projectile_manager, position=(500, 200))  # Pass projectile_manager and position
+    # Initialize the blue with the projectile manager
+    blue_enemy = Blue(projectile_manager, position=(500, 200))  # Pass projectile_manager and position
     
-    # Register rival as a target for projectiles
-    projectile_manager.add_target(rival)
+    # Register blue as a target for projectiles
+    projectile_manager.add_target(blue_enemy)
 
     # Add player to the sprite group
     all_sprites = pygame.sprite.Group()
     all_sprites.add(player)
-    all_sprites.add(rival)  # Add rival to sprite group
+    all_sprites.add(blue_enemy)  # Add blue to sprite group
 
     debug_system = DS()
 
@@ -76,7 +76,7 @@ def main():
         
         # Draw hitboxes when debug mode is enabled
         if debug_system.show_hitboxes:
-            rival.draw_hitbox(screen)
+            blue_enemy.draw_hitbox(screen)
         
         # Render debug info at the end
         debug_system.render_debug_info(screen, player, clock)
@@ -88,7 +88,7 @@ def main():
 
         # Instead of print statements, use logging
         logging.debug(f"Player position: {player.rect.center}")
-        logging.debug(f"Rival position: {rival.rect.center}")  # Log rival position
+        logging.debug(f"blue position: {blue_enemy.rect.center}")  # Log blue position
 
     # Clean up properly
     pygame.quit()

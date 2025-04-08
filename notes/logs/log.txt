@@ -1,0 +1,115 @@
+04/03 
+
+## Development Log
+
+### Session Progress
+
+**Initial Rival Integration**
+- Added rival import to main.py
+- Created rival instance with projectile_manager
+- Added rival to sprite group for rendering and updates
+- Fixed asset path issues (adding sprites folder, correct subdirectories)
+
+**Collision Detection System**
+- Implemented hitbox for Rival (80% of sprite size)
+- Added collision detection method in Rival class
+- Maintained hitbox position to follow sprite movement
+- Added debug rendering of hitboxes when enabled
+
+**Damage Animation Flow**
+1. Projectile hits rival hitbox
+2. Collision triggers take_damage() method
+3. Direction-aware damage animation displays
+4. Animation reverts to idle after damage_duration
+
+**Key Code Components**
+- Separate animation lists for different states (idle_left, idle_right, damage_left, damage_right)
+- State-based animation system with timing controls
+- Fallback sprite generation for missing assets
+- Hitbox-based collision rather than sprite rectangle collision
+
+**Pending Implementation**
+- Health display and actual damage calculation
+- Death animation and handling
+- More sophisticated rival AI behavior
+
+03/31
+
+
+# Session Development Log
+
+## Project Overview
+- **Project Name**: Memento
+- **Type**: Pygame-based 2D game
+- **Architecture**: Entity-component system with manager classes
+
+## Code Structure
+```
+src/
+├── assets/sprites/player/...
+├── entities/
+│   ├── player.py
+│   ├── rival.py
+│   └── projectiles.py
+├── systems/
+│   ├── debug.py
+│   └── projectile_manager.py
+└── main.py
+```
+
+## Key Components
+
+### Player Entity
+- Animated sprite with idle and movement states
+- Direction-aware animations (left/right)
+- Mouse-based movement system
+- Projectile firing capability
+
+### Projectile System
+- Manager class for handling projectiles
+- Physics-based movement
+- Range-limited projectiles
+- Collision detection with targets
+
+### Debug System
+- Toggle-able debug overlay
+- FPS counter and position tracking
+- Hitbox visualization
+
+### Main Game Loop
+- Event handling (input, window events)
+- State updates for all game objects
+- Rendering pipeline
+- Frame rate control
+
+## Learning Points
+
+1. **Python Conventions**:
+   - Underscore prefix (`_method_name`) for internal/private methods
+   - This is a Python-specific convention, not enforced by the language
+
+2. **Game Architecture**:
+   - Separation of entities and systems
+   - Manager classes for related functionality
+   - Event-driven gameplay
+
+3. **Pygame Patterns**:
+   - Main game loop structure
+   - Sprite management
+   - Surface rendering
+   - Event handling
+
+## Development Path
+- Created player entity with animation system
+- Implemented movement and controls
+- Added projectile system with collision
+- Incorporated rival entity as target
+- Added debug visualization system
+
+## Next Steps (from Roadmap)
+1. Complete Python fundamentals review
+2. Deepen understanding of Pygame basics
+3. Study project structure patterns
+4. Master sprite and animation systems
+5. Explore advanced game systems
+6. Implement additional features

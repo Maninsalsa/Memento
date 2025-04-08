@@ -2,11 +2,11 @@ import pygame
 import os
 import math
 
-class Rival(pygame.sprite.Sprite):
-    """Rival class representing an NPC opponent."""
+class Blue(pygame.sprite.Sprite):
+    """blue class representing an NPC opponent."""
     
     def __init__(self, projectile_manager, position=(300, 300)):
-        """Initialize the rival sprite with image and starting position."""
+        """Initialize the blue sprite with image and starting position."""
         super().__init__()
         
         # Initialize sprite attributes
@@ -16,7 +16,7 @@ class Rival(pygame.sprite.Sprite):
         # Load sprites and animations
         self._load_sprites()
         
-        # Setup rival rectangle and position
+        # Setup blue rectangle and position
         self.rect = self.image.get_rect()
         self.rect.center = position
         
@@ -34,7 +34,7 @@ class Rival(pygame.sprite.Sprite):
         self.damage_duration = 500  # milliseconds
 
     def _load_sprites(self):
-        """Load all sprite animations for the rival."""
+        """Load all sprite animations for the blue."""
         try:
             # Initialize animation lists
             self.left_idle_sprites = []
@@ -51,7 +51,7 @@ class Rival(pygame.sprite.Sprite):
             self.image = self.current_animation[0]
             
         except pygame.error as e:
-            print(f"Error loading rival image: {e}")
+            print(f"Error loading blue image: {e}")
             self._create_fallback_sprites()
 
     def _load_idle_animations(self):
@@ -60,7 +60,7 @@ class Rival(pygame.sprite.Sprite):
         
         # Load left idle frames
         for i in range(1, 3):
-            path = os.path.join(base_dir, f'../assets/sprites/enemies/rival/idle/left_idle_{i}.png')
+            path = os.path.join(base_dir, f'../assets/sprites/enemies/blue/left_idle_{i}.png')
             try:
                 original = pygame.image.load(path).convert_alpha()
                 scaled = pygame.transform.scale(original, self.scaled_size)
@@ -70,7 +70,7 @@ class Rival(pygame.sprite.Sprite):
         
         # Load right idle frames
         for i in range(1, 3):
-            path = os.path.join(base_dir, f'../assets/sprites/enemies/rival/idle/right_idle_{i}.png')
+            path = os.path.join(base_dir, f'../assets/sprites/enemies/blue/right_idle_{i}.png')
             try:
                 original = pygame.image.load(path).convert_alpha()
                 scaled = pygame.transform.scale(original, self.scaled_size)
@@ -84,7 +84,7 @@ class Rival(pygame.sprite.Sprite):
         
         # Load left damage frames
         for i in range(1, 3):
-            path = os.path.join(base_dir, f'../assets/sprites/enemies/rival/damage/damage_left_{i}.png')
+            path = os.path.join(base_dir, f'../assets/sprites/enemies/blue/damage_left_{i}.png')
             try:
                 original = pygame.image.load(path).convert_alpha()
                 scaled = pygame.transform.scale(original, self.scaled_size)
@@ -94,7 +94,7 @@ class Rival(pygame.sprite.Sprite):
         
         # Load right damage frames
         for i in range(1, 3):
-            path = os.path.join(base_dir, f'../assets/sprites/enemies/rival/damage/damage_right_{i}.png')
+            path = os.path.join(base_dir, f'../assets/sprites/enemies/blue/damage_right_{i}.png')
             try:
                 original = pygame.image.load(path).convert_alpha()
                 scaled = pygame.transform.scale(original, self.scaled_size)
@@ -140,7 +140,7 @@ class Rival(pygame.sprite.Sprite):
             # Could trigger death animation or removal here
 
     def update(self):
-        """Update the rival's state each frame."""
+        """Update the blue's state each frame."""
         current_time = pygame.time.get_ticks()
         
         # Check if damage animation should end
@@ -156,7 +156,7 @@ class Rival(pygame.sprite.Sprite):
         self._update_animation()
 
     def check_projectile_collision(self, projectile):
-        """Check if a projectile has collided with the rival's hitbox."""
+        """Check if a projectile has collided with the blue's hitbox."""
         if self.hitbox.colliderect(projectile.rect):
             return True
         return False
