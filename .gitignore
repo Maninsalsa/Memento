@@ -15,6 +15,10 @@
 *.ipr
 out/
 
+# Project specific directories
+future_plans/
+notes/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -41,6 +45,8 @@ wheels/
 env/
 venv/
 ENV/
+# Add any custom virtual environment names here
+*env/
 .python-version
 .pytest_cache/
 .coverage
@@ -137,6 +143,8 @@ debug.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+game_debug.log
+*_debug.log
 
 # Test coverage
 coverage/
@@ -160,3 +168,19 @@ coverage.xml
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Game development
+*.sav
+*.save
+save_data/
+highscores.dat
+profiling/
+*.profile
+*.trace
+# Compiled game assets
+*.compiled
+*.processed
+# User settings
+user_settings.json
+settings.cfg
+config.ini
