@@ -3,16 +3,20 @@ import logging
 
 class DebugSystem:
     def __init__(self):
+        # Create font object for debug text
         self.debug_font = pygame.font.Font(None, 36)
+        # None = default system font, 36 = size in pixels
+
+        # Initialize state flags
         self.enabled = False
         self.show_hitboxes = False
         
-    def setup_logging(self):
-        logging.basicConfig(
-            filename='game_debug.log',
-            level=logging.DEBUG,
-            format='%(asctime)s - %(levelname)s - %(message)s'
-        )
+    # def setup_logging(self):
+    #     logging.basicConfig(
+    #         filename='game_debug.log',
+    #         level=logging.DEBUG,
+    #         format='%(asctime)s - %(levelname)s - %(message)s'
+    #     )
     
     def toggle(self):
         self.enabled = not self.enabled

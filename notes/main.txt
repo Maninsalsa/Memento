@@ -1,0 +1,5 @@
+
+
+main() - The entry point/driver function that initializes and runs the Pygame application. It handles setup, the game loop, and cleanup.
+
+__name__ - A special built-in variable in Python that contains the name of the current module. When a Python file is run directly, __name__ is set to "__main__". When imported as a module, __name__ is set to the module's name. This allows code to behave differently when run directly versus when imported. The pattern `if __name__ == "__main__": main()` is a common Python idiom that prevents the main code from executing when the file is imported as a module. This demonstrates the principle of modular design - using variables instead of literal values makes code more flexible and compatible with other systems. If you were to call main() directly without this check, the function would always run when the module is imported, which is usually not the desired behavior.

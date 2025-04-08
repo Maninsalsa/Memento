@@ -45,5 +45,3 @@
   - Industry standard 2D physics implementation
 
 ### HAVOK physics engine
-
-This documentation roadmap will provide the theoretical and practical knowledge needed for successful implementation of your custom physics engine with Cython and C++.

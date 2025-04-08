@@ -4,12 +4,17 @@ from systems.projectile_manager import ProjectileManager
 import math
 
 # Player Module
+# This class is used in:
+# - src/main.py (for creating and updating the player)
+# - src/scenes/game_scene.py (for player-scene interactions)
+# - src/systems/collision_system.py (for collision detection)
 
 class Player(pygame.sprite.Sprite):
     """Player class representing the main character controlled by the user."""
     
     def __init__(self, projectile_manager):
         """Initialize the player sprite with image and starting position."""
+        # Called from src/main.py and src/scenes/game_scene.py when creating player instance
         super().__init__()
         
         # Debug: Print current working directory and file paths
@@ -37,12 +42,14 @@ class Player(pygame.sprite.Sprite):
 
     def _setup_debug_info(self):
         """Setup debug information and paths."""
+        # Internal method called from __init__
         self.base_dir = os.path.dirname(__file__)
         print(f"Current directory: {os.getcwd()}")
         print(f"Base directory: {self.base_dir}")
 
     def _load_sprites(self):
         """Load all sprite animations for the player."""
+        # Internal method called from __init__
         try:
             # Load base image
             self._load_base_image()
@@ -62,6 +69,7 @@ class Player(pygame.sprite.Sprite):
 
     def _load_base_image(self):
         """Load and scale the base player image."""
+        # Internal method called from _load_sprites
         idle_path = os.path.join(self.base_dir, '../assets/sprites/player/left_idle_1.png')
         print(f"Loading idle sprite from: {idle_path}")
         original_image = pygame.image.load(idle_path).convert_alpha()
@@ -69,6 +77,7 @@ class Player(pygame.sprite.Sprite):
 
     def _load_idle_animations(self):
         """Load idle animation frames."""
+        # Internal method called from _load_sprites
         # Initialize separate lists for left and right idle animations
         self.left_idle_sprites = []
         self.right_idle_sprites = []
@@ -94,6 +103,7 @@ class Player(pygame.sprite.Sprite):
 
     def _load_movement_animations(self):
         """Load movement animation frames for left and right directions."""
+        # Internal method called from _load_sprites
         for i in range(1, 4):
             # Define paths
             left_path = os.path.join(self.base_dir, f'../assets/sprites/player/left_move_{i}.png')
@@ -118,6 +128,7 @@ class Player(pygame.sprite.Sprite):
 
     def _create_fallback_movement_sprite(self, index, path):
         """Create fallback sprites when loading fails."""
+        # Internal method called from _load_movement_animations
         fallback = pygame.Surface(self.scaled_size)
         fallback.fill((255, 0, 0) if 'left' in path else (0, 0, 255))
         self.left_move_sprites.append(fallback)
@@ -125,6 +136,7 @@ class Player(pygame.sprite.Sprite):
 
     def _create_fallback_sprites(self):
         """Create fallback sprites when all loading fails."""
+        # Internal method called from _load_sprites
         self.image = pygame.Surface(self.scaled_size)
         self.image.fill((255, 0, 0))
         self.idle_sprites = [self.image, self.image]
@@ -133,6 +145,7 @@ class Player(pygame.sprite.Sprite):
 
     def _setup_animation(self):
         """Setup animation timers and initial state."""
+        # Internal method called from __init__
         self.current_sprite = 0
         self.animation_timer = 0
         self.animation_delay = 167
@@ -147,20 +160,24 @@ class Player(pygame.sprite.Sprite):
 
     def _setup_movement(self):
         """Setup movement related attributes."""
+        # Internal method called from __init__
         self.target_pos = None
         self.speed = 5
 
     def _setup_shooting(self):
         """Setup shooting related attributes."""
+        # Internal method called from __init__
         self.can_shoot = True  # Flag to track if we can shoot
         self.projectile_range = 500  # Adjustable range for projectiles
 
-    def set_destination(self, pos):
-        """Set new destination for the player to move to."""
-        self.target_pos = pos
+    # def set_destination(self, pos):
+    #     """Set new destination for the player to move to."""
+    #     # Called from src/scenes/game_scene.py when handling player movement input
+    #     self.target_pos = pos
 
     def update(self):
         """Update player state and handle input."""
+        # Called from src/main.py game loop and src/scenes/game_scene.py update method
         self._handle_input()
         self._handle_movement()
         self._handle_shooting()
@@ -168,12 +185,15 @@ class Player(pygame.sprite.Sprite):
 
     def _handle_input(self):
         """Handle mouse input for movement."""
+        # Internal method called from update
         mouse_buttons = pygame.mouse.get_pressed()
         if mouse_buttons[2]:  # Right click
             self.target_pos = pygame.mouse.get_pos()
 
     def _handle_movement(self):
         """Handle player movement logic."""
+        # Internal method called from update
+        # Movement collision is checked in src/systems/collision_system.py
         if not self.target_pos:
             return
             
@@ -206,6 +226,8 @@ class Player(pygame.sprite.Sprite):
 
     def _handle_shooting(self):
         """Handle projectile firing logic."""
+        # Internal method called from update
+        # Interacts with src/systems/projectile_manager.py
         keys = pygame.key.get_pressed()
         if not keys[pygame.K_SPACE]:
             self.can_shoot = True  # Reset flag when space is released
@@ -222,6 +244,7 @@ class Player(pygame.sprite.Sprite):
 
     def _update_animation(self):
         """Update animation frames."""
+        # Internal method called from update
         now = pygame.time.get_ticks()
         self.animation_timer += now - self.last_update
         self.last_update = now
@@ -231,6 +254,7 @@ class Player(pygame.sprite.Sprite):
             self.current_sprite = (self.current_sprite + 1) % len(self.current_animation)
             self.image = self.current_animation[self.current_sprite]
 
-    def set_projectile_range(self, new_range):
-        """Adjust the range of projectiles."""
-        self.projectile_range = new_range
+    # def set_projectile_range(self, new_range):
+    #     """Adjust the range of projectiles."""
+    #     # Called from src/scenes/game_scene.py when player upgrades are applied
+    #     self.projectile_range = new_range
